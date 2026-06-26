@@ -49,11 +49,17 @@ body{
     padding:70px 10% 0;
 }
 .home-img{
-    border-radius:40%;
-    background-size:cover;
-    height:400px;
-    padding-left:20px;
-    width:400px;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #0ef;
+    box-shadow: 0 0 25px rgba(0, 238, 255, 0.5);
+    transition: transform 0.4s ease;
+}
+
+.home-img:hover{
+    transform: scale(1.05);
 }
 .home-content{
     max-width:600px;
@@ -118,9 +124,21 @@ body{
    gap:1.5rem;
 }
 .about-img img{
-  padding-left:20px;
-  margin-left:60px;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #0ef;
+    box-shadow: 0 0 25px rgba(0, 238, 255, 0.4);
+    display: block;
+    margin: auto;
+    transition: transform 0.4s ease;
 }
+
+.about-img img:hover{
+    transform: scale(1.05);
+}
+
 .about-text h2,.sub-title{
     font-size:60px;
 }
@@ -184,42 +202,74 @@ section{
     animation:showText 0.5s 1s linear forwards;  
     opacity:0;
 }
+/* ===== SKILLS SECTION FIX ===== */
+
+.Technical-bars{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.Technical-bars .bar{
+    font-size:23px;
+}
+
+.Technical-bars .bar .info{
+    margin-bottom:5px;
+}
+
+.Technical-bars .bar .info span{
+    font-size:17px;
+    font-weight:500;
+    opacity:0;
+    animation:showText 0.5s 1s forwards;
+}
+
+/* BACKGROUND BAR */
 .Technical-bars .bar .progress-line{
     position:relative;
-    border-radius:10px;
     width:100%;
-    height:5px;
-    background-color:#000000;
-    animation:animate 1s cubic-bezier(1,0,0.5,1) forwards;
-    transform:scaleX(0);
-    transform-origin:left;
+    height:6px;
+    background:#000;
+    border-radius:10px;
+    overflow:hidden;
 }
-@keyframes animate{
+
+/* FILL BAR */
+.Technical-bars .bar .progress-line span{
+    position:absolute;
+    height:100%;
+    left:0;
+    top:0;
+    width:0;
+    border-radius:10px;
+    background:#0ef;
+    animation:fillBar 2s forwards;
+}
+
+/* ANIMATION */
+@keyframes fillBar{
     100%{
-        transform:scaleX(1);
+        width: var(--progress);
     }
 }
-.Technical-bars .bar .progress-line span{
-    height:100%;
-    background-color: #0ef;
-    position:absolute;
-    border-radius:10px;
-    animation:animate 1s 1s cubic-beizer(1,0,0.5,1) forwards;
-    transform:scaleX(0);
-    transform-origin:left;
+
+/* SKILL WIDTHS */
+.progress-line.html span{ --progress:90%; }
+.progress-line.css span{ --progress:75%; }
+.progress-line.javascript span{ --progress:70%; }
+.progress-line.react span{ --progress:75%; }
+.progress-line.nodejs span{ --progress:65%; }
+.progress-line.express span{ --progress:60%; }
+.progress-line.mongodb span{ --progress:70%; }
+
+/* TEXT ANIMATION */
+@keyframes showText{
+    to{
+        opacity:1;
+    }
 }
-.progress-line.html span{
-    width:90%;
-}
-.progress-line.css span{
-    width:60%;
-}
-.progress-line.javascript span{
-    width:70%;
-}
-.progress-line.react span{
-    width:75%;
-}
+
 .progress-line span::after{
     position:absolute;
     padding:1px 8px;
